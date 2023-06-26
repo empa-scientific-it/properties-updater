@@ -53,6 +53,6 @@ publish-gh:
     - git remote add gh https://$GITHUB_TOKEN@github.com/empa-scientific-it/properties-updater.git
     - git add .
     - git commit -m "push back from pipeline"
-    - git push gitlab_origin HEAD:main -o ci.skip # prevent triggering pipeline again
+    - git push gh HEAD:main -o ci.skip # prevent triggering pipeline again
 
 
