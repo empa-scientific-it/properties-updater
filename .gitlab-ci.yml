@@ -50,7 +50,8 @@ publish-gh:
   script:
     - git config user.email "simone.baffelli@empa.ch"
     - git config user.name "ci-bot"
-    - git push https://$GITHUB_TOKEN@github.com/empa-scientific-it/properties-updater.git main -o ci.skip -u
+    - git remote add gh https://$GITHUB_TOKEN@github.com/empa-scientific-it/properties-updater.git
+    - git push gh main
   only:
     changes:
       - "**/*.go"
