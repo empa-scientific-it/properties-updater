@@ -52,7 +52,7 @@ publish-gh:
     - git config user.name "ci-bot"
     - git remote rm gh
     - git remote add gh https://$GITHUB_TOKEN@github.com/empa-scientific-it/properties-updater.git
-    - git push gh main
+    - git push -u gh main
   only:
     changes:
       - "**/*.go"
