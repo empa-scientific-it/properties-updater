@@ -57,6 +57,7 @@ publish-gh:
       - README.md
       - go.mod
       - LICENSE
+      - .gitlab-ci.yml
 
 
 
