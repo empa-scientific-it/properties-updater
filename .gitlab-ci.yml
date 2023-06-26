@@ -50,9 +50,7 @@ publish-gh:
   script:
     - git config user.email "simone.baffelli@empa.ch"
     - git config user.name "ci-bot"
-    - git add .
-    - git commit -m "push back from pipeline"
-    - git push https://$GITHUB_TOKEN@github.com/empa-scientific-it/properties-updater.git main -o ci.skip
+    - git push https://$GITHUB_TOKEN@github.com/empa-scientific-it/properties-updater.git main -o ci.skip -u
   only:
     changes:
       - "**/*.go"
