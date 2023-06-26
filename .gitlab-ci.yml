@@ -53,7 +53,7 @@ publish-gh:
     - git remote rm gh
     - git remote add gh https://$GITHUB_TOKEN@github.com/empa-scientific-it/properties-updater.git
     - git add .
-    - git commit -m "ci: update from gitlab-ci"
+    - "git commit -m \"ci: update from gitlab-ci\""
     - git push -u gh main
   only:
     changes:
