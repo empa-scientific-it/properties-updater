@@ -1,0 +1,28 @@
+version: "3"
+tasks:
+  deps:
+    cmds:
+      - go mod download
+    sources:
+      - go.mod
+    generates:
+      - go.sum
+    run: when_changed
+  format:
+    cmds:
+      - go fmt $(go list ./... | grep -v /vendor/)
+    sources:
+      - ./**/*.go
+    generates:
+      - ./**/*.go
+    deps:
+      - deps
+    run: when_changed
+  test:
+    cmds:
+      - go test $(go list ./... | grep -v /vendor/)
+    deps:
+      - format
+    sources:
+      - ./**/*.go
+    run: when_changed
