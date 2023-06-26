@@ -24,7 +24,7 @@ format:
     - go fmt $(go list ./... | grep -v /vendor/)
     - go vet $(go list ./... | grep -v /vendor/)
     - go test -race $(go list ./... | grep -v /vendor/)
-  except:
+  only:
     changes:
       - "**/*.go"
 
@@ -41,7 +41,7 @@ compile:
   artifacts:
     paths:
       - build
-  except:
+  only:
     changes:
       - "**/*.go"
 
@@ -53,6 +53,12 @@ publish-gh:
     - git add .
     - git commit -m "push back from pipeline"
     - git push https://$GITHUB_TOKEN@github.com/empa-scientific-it/properties-updater.git HEAD:main -o ci.skip
+  only:
+    changes:
+      - "**/*.go"
+      - README.md
+      - go.mod
+      - LICENSE
 
 
 
