@@ -8,11 +8,12 @@ stages:
   - build
   - deploy
 
+cache:
+  paths:
+    - .cache
+
 format:
   stage: test
-  cache:
-    paths:
-      - .cache
   before_script:
     - mkdir -p .cache
     - export GOPATH="$CI_PROJECT_DIR/.cache"
@@ -24,13 +25,9 @@ format:
 
 compile:
   stage: build
-  cache:
-    paths:
-      - .cache
   before_script:
     - export GOPATH="$CI_PROJECT_DIR/.cache"
   script:
-    
     - mkdir -p build
     - go build -o build ./...
   artifacts:
