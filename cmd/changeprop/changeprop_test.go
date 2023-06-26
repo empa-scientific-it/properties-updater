@@ -34,7 +34,7 @@ func TestSetProp(t *testing.T) {
 		// Update the file with new value
 		tfNew, err  := os.OpenFile(tf.Name(), os.O_WRONLY, 0600)
 		ioutils.HandleError(err)
-		UpdateFile(tfNew, c.new)
+		UpdateFile(tfNew, c.new, Replace)
 		tfNew.Close()
 		p := properties.MustLoadFile(tfNew.Name(), properties.UTF8)
 		newVal, ok := p.Get(c.orig.Key)
