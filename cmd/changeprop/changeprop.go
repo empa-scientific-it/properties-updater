@@ -14,11 +14,11 @@ type Mode struct {
 }
 
 var (
-	Replace = Mode{"replace"}
-	Create  = Mode{"create"}
+	Replace   = Mode{"replace"}
+	Create    = Mode{"create"}
 	Uncomment = Mode{"uncomment"}
-	Comment = Mode{"comment"}
-	Unknown = Mode{"unknown"}
+	Comment   = Mode{"comment"}
+	Unknown   = Mode{"unknown"}
 )
 
 func FromString(s string) (Mode, error) {
@@ -34,7 +34,7 @@ func FromString(s string) (Mode, error) {
 func UpdateFile(propertyFile *os.File, kv dao.KeyValue, mode Mode) {
 	p := properties.MustLoadFile(propertyFile.Name(), properties.UTF8)
 	prev, ok, err := p.Set(kv.Key, kv.Value)
-		
+
 	fmt.Println(ok)
 	if (ok && mode == Replace) || (!ok && mode == Create) {
 		fmt.Println("Updating property file: " + propertyFile.Name())

@@ -1,22 +1,18 @@
 package main
 
 import (
-	"testing"
-	ioutils "empa/basi/properties-updater/pkg/io"
 	dao "empa/basi/properties-updater/pkg/dao"
-	"os"
+	ioutils "empa/basi/properties-updater/pkg/io"
 	"github.com/magiconair/properties"
-
+	"os"
+	"testing"
 )
-
 
 func writeKeyValue(file *os.File, kv dao.KeyValue) {
 	p := properties.MustLoadFile(file.Name(), properties.UTF8)
 	p.Set(kv.Key, kv.Value)
 	p.Write(file, properties.UTF8)
 }
-
-
 
 func TestSetProp(t *testing.T) {
 	cases := []struct {
@@ -32,14 +28,14 @@ func TestSetProp(t *testing.T) {
 		writeKeyValue(tf, c.orig)
 		tf.Close()
 		// Update the file with new value
-		tfNew, err  := os.OpenFile(tf.Name(), os.O_WRONLY, 0600)
+		tfNew, err := os.OpenFile(tf.Name(), os.O_WRONLY, 0600)
 		ioutils.HandleError(err)
 		UpdateFile(tfNew, c.new, Replace)
 		tfNew.Close()
 		p := properties.MustLoadFile(tfNew.Name(), properties.UTF8)
 		newVal, ok := p.Get(c.orig.Key)
 		defer os.Remove(tf.Name())
-		if ok{
+		if ok {
 			if newVal != c.new.Value {
 				t.Errorf("Expected %s, got %s", c.new.Value, newVal)
 			}

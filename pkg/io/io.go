@@ -11,7 +11,7 @@ func HandleError(err error) {
 	}
 }
 
-func TempFile() (*os.File, error) {	
+func TempFile() (*os.File, error) {
 	file, err := ioutil.TempFile("/tmp/", "test.*.properties")
 	return file, err
 }
