@@ -1,11 +1,16 @@
 package main
 
-
-import(
-	"github.com/magiconair/properties"
+import (
 	"fmt"
+	"github.com/magiconair/properties"
 	"os"
 )
+
+func handleError(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
 
 func main() {
 	argsWithoutProg := os.Args[1:]
@@ -17,9 +22,19 @@ func main() {
 	propertyName := argsWithoutProg[1]
 	propertyValue := argsWithoutProg[2]
 	p := properties.MustLoadFile(propertyFile, properties.UTF8)
-	p.Set(propertyName, propertyValue)
-	fmt.Println("Updating property file: " + propertyFile)
-	fmt.Println("Setting property: " + propertyName + " to value: " + propertyValue)
-	fmt.Println(p)
-	p.Write(propertyFile, properties.UTF8)
+	prev, ok, err := p.Set(propertyName, propertyValue)
+	if ok {
+		fmt.Println("Updating property file: " + propertyFile)
+		fmt.Println("Setting property: " + propertyName  + " with value: " + prev + " to value: " + propertyValue)
+		fmt.Println("The file is now:")
+		fmt.Println(p)
+		outFile, err := os.Create(propertyFile)
+		handleError(err)
+		defer outFile.Close()
+		p.Write(outFile, properties.UTF8)
+
+	}else{
+		handleError(err)
+	}
+
 }
