@@ -27,6 +27,8 @@ compile:
   stage: build
   before_script:
     - export GOPATH="$CI_PROJECT_DIR/.cache"
+    - echo $GOPATH
+    - ls $GOPATH
   script:
     - mkdir -p build
     - go build -o build ./...
