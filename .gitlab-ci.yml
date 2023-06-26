@@ -6,7 +6,7 @@ variables:
 stages:
   - test
   - build
-  - deploy
+  - publish
 
 
 cache:
@@ -41,9 +41,18 @@ compile:
   artifacts:
     paths:
       - build
+  except:
+    changes:
+      - "**/*.go"
 
-deploy:
-  stage: deploy
-  script: echo "Define your deployment script!"
-  environment: production
+publish-gh:
+  stage: publish
+  script:
+    - git config user.email "simone.baffelli@empa.ch"
+    - git config user.name "ci-bot"
+    - git remote add gh https://$GITHUB_TOKEN@github.com/empa-scientific-it/properties-updater.git
+    - git add .
+    - git commit -m "push back from pipeline"
+    - git push gitlab_origin HEAD:main -o ci.skip # prevent triggering pipeline again
+
 
