@@ -55,7 +55,7 @@ publish-gh:
     - git checkout "$CI_COMMIT_REF_NAME"
     - git add -u .
     - "git commit -m \"ci: update from gitlab-ci\" || true"
-    - git push -u gh main
+    - git push -u --force gh main
   variables:
     GIT_STRATEGY: clone
   only:
