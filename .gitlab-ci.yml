@@ -7,7 +7,12 @@ stages:
 
 format:
   stage: test
+  cache:
+    paths:
+      - .cache
   script:
+    - mkdir -p .cache
+    - export GOPATH="$CI_PROJECT_DIR/.cache"
     - go get empa/basi/properties-updater/cmd/changeprop
     - go fmt $(go list ./... | grep -v /vendor/)
     - go vet $(go list ./... | grep -v /vendor/)
@@ -15,7 +20,11 @@ format:
 
 compile:
   stage: build
+  cache:
+    paths:
+      - .cache
   script:
+    - export GOPATH="$CI_PROJECT_DIR/.cache"
     - mkdir -p build
     - go build -o build ./...
   artifacts:
