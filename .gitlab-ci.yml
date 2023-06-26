@@ -55,6 +55,8 @@ publish-gh:
     - git add .
     - "git commit -m \"ci: update from gitlab-ci\""
     - git push -u gh main
+  variables:
+    GIT_STRATEGY: clone
   only:
     changes:
       - "**/*.go"
