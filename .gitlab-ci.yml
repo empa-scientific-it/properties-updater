@@ -15,11 +15,11 @@ format:
 compile:
   stage: build
   script:
-    - mkdir -p mybinaries
-    - go build -o mybinaries ./...
+    - mkdir -p build
+    - go build -o build ./...
   artifacts:
     paths:
-      - mybinaries
+      - build
 
 deploy:
   stage: deploy
