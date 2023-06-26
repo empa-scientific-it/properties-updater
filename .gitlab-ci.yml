@@ -33,6 +33,7 @@ compile:
     - ls $GOPATH
   script:
     - mkdir -p build
+    - go get empa/basi/properties-updater/cmd/changeprop
     - go build -o build ./...
   artifacts:
     paths:
